@@ -11,7 +11,7 @@ import {
   wordCloudCollection,
   WordCloudTag,
 } from './common'
-import mysql from 'mysql2/promise'
+import mysql, { RowDataPacket } from 'mysql2/promise'
 import { getEmail } from './getEmail'
 import { getImportStatus, importPST } from './importPST'
 import { clearSearchHistory, getSearchHistory } from './searchHistory'
@@ -62,11 +62,9 @@ const getEmailSentByDay = async (): Promise<Array<EmailSentByDay>> => {
     `select * from ${emailSentByDayCollection} order by day_sent asc`
   )
   connection.end()
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  return rows.map((day) => ({
+  return (rows as RowDataPacket[]).map((day: RowDataPacket) => ({
     sent: day.day_sent,
-    emailIds: day.total,
+    total: day.total,
   }))
 }
 
@@ -89,11 +87,10 @@ const getCustodians = async (): Promise<Array<Custodian>> => {
     `select * from ${custodianCollection} order by custodian_id asc`
   )
   connection.end()
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  return rows.map((custodian) => ({
+  return (rows as RowDataPacket[]).map((custodian: RowDataPacket) => ({
     id: custodian.custodian_id,
     name: custodian.custodian_name,
+    aliases: [],
     title: custodian.title,
     color: custodian.color,
     senderTotal: custodian.sender_total,
@@ -126,11 +123,10 @@ const setCustodianColor = async (
     `select * from ${custodianCollection} order by custodian_id asc`
   )
   connection.end()
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  return rows.map((custodian) => ({
+  return (rows as RowDataPacket[]).map((custodian: RowDataPacket) => ({
     id: custodian.custodian_id,
     name: custodian.custodian_name,
+    aliases: [],
     title: custodian.title,
     color: custodian.color,
     senderTotal: custodian.sender_total,
