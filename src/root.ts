@@ -17,14 +17,6 @@ import { getImportStatus, importPST } from './importPST'
 import { clearSearchHistory, getSearchHistory } from './searchHistory'
 
 const getWordCloud = async (): Promise<Array<WordCloudTag>> => {
-  if (
-    !process.env.MYSQL_HOST ||
-    !process.env.MYSQL_USER ||
-    !process.env.MYSQL_ROOT_PASSWORD
-  ) {
-    throw 'MYSQL_HOST or MYSQL_USER or MYSQL_ROOT_PASSWORD undefined'
-  }
-
   const connection = await mysql.createConnection({
     host: process.env.MYSQL_HOST,
     user: process.env.MYSQL_USER,
@@ -44,14 +36,6 @@ const getWordCloud = async (): Promise<Array<WordCloudTag>> => {
 }
 
 const getEmailSentByDay = async (): Promise<Array<EmailSentByDay>> => {
-  if (
-    !process.env.MYSQL_HOST ||
-    !process.env.MYSQL_USER ||
-    !process.env.MYSQL_ROOT_PASSWORD
-  ) {
-    throw 'MYSQL_HOST or MYSQL_USER or MYSQL_ROOT_PASSWORD undefined'
-  }
-
   const connection = await mysql.createConnection({
     host: process.env.MYSQL_HOST,
     user: process.env.MYSQL_USER,
@@ -69,14 +53,6 @@ const getEmailSentByDay = async (): Promise<Array<EmailSentByDay>> => {
 }
 
 const getCustodians = async (): Promise<Array<Custodian>> => {
-  if (
-    !process.env.MYSQL_HOST ||
-    !process.env.MYSQL_USER ||
-    !process.env.MYSQL_ROOT_PASSWORD
-  ) {
-    throw 'MYSQL_HOST or MYSQL_USER or MYSQL_ROOT_PASSWORD undefined'
-  }
-
   const connection = await mysql.createConnection({
     host: process.env.MYSQL_HOST,
     user: process.env.MYSQL_USER,
@@ -102,14 +78,6 @@ const getCustodians = async (): Promise<Array<Custodian>> => {
 const setCustodianColor = async (
   httpQuery: HTTPQuery
 ): Promise<Array<Custodian>> => {
-  if (
-    !process.env.MYSQL_HOST ||
-    !process.env.MYSQL_USER ||
-    !process.env.MYSQL_ROOT_PASSWORD
-  ) {
-    throw 'MYSQL_HOST or MYSQL_USER or MYSQL_ROOT_PASSWORD undefined'
-  }
-
   const connection = await mysql.createConnection({
     host: process.env.MYSQL_HOST,
     user: process.env.MYSQL_USER,

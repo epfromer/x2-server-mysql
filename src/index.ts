@@ -6,6 +6,14 @@ import { graphqlSchema } from './common'
 import root from './root'
 dotenv.config()
 
+if (
+  !process.env.MYSQL_HOST ||
+  !process.env.MYSQL_USER ||
+  !process.env.MYSQL_ROOT_PASSWORD
+) {
+  throw 'MYSQL_HOST or MYSQL_USER or MYSQL_ROOT_PASSWORD undefined'
+}
+
 const app = express()
 app.use(cors())
 app.use(
