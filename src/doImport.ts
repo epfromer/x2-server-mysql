@@ -26,7 +26,7 @@ const processSend = (msg: string) => {
   process.send(msg)
 }
 
-async function run() {
+const checkEnv = () => {
   if (
     !process.env.MYSQL_HOST ||
     !process.env.MYSQL_USER ||
@@ -34,6 +34,10 @@ async function run() {
   ) {
     throw 'MYSQL_HOST or MYSQL_USER or MYSQL_ROOT_PASSWORD undefined'
   }
+}
+
+async function run() {
+  checkEnv()
 
   if (!getNumPSTs(process.argv[2])) {
     processSend(`no PSTs found in ${process.argv[2]}`)
