@@ -20,8 +20,8 @@ import { clearSearchHistory, getSearchHistory } from './searchHistory'
 const getWordCloud = async (): Promise<Array<WordCloudTag>> => {
   const connection = await mysql.createConnection({
     host: getEnv('MYSQL_HOST'),
-    user: process.env.MYSQL_USER,
-    password: process.env.MYSQL_ROOT_PASSWORD,
+    user: getEnv('MYSQL_USER'),
+    password: getEnv('MYSQL_ROOT_PASSWORD'),
     database: dbName,
   })
   const [rows] = await connection.execute(
@@ -39,8 +39,8 @@ const getWordCloud = async (): Promise<Array<WordCloudTag>> => {
 const getEmailSentByDay = async (): Promise<Array<EmailSentByDay>> => {
   const connection = await mysql.createConnection({
     host: getEnv('MYSQL_HOST'),
-    user: process.env.MYSQL_USER,
-    password: process.env.MYSQL_ROOT_PASSWORD,
+    user: getEnv('MYSQL_USER'),
+    password: getEnv('MYSQL_ROOT_PASSWORD'),
     database: dbName,
   })
   const [rows] = await connection.execute(
@@ -56,8 +56,8 @@ const getEmailSentByDay = async (): Promise<Array<EmailSentByDay>> => {
 const getCustodians = async (): Promise<Array<Custodian>> => {
   const connection = await mysql.createConnection({
     host: getEnv('MYSQL_HOST'),
-    user: process.env.MYSQL_USER,
-    password: process.env.MYSQL_ROOT_PASSWORD,
+    user: getEnv('MYSQL_USER'),
+    password: getEnv('MYSQL_ROOT_PASSWORD'),
     database: dbName,
   })
   const [rows] = await connection.execute(
@@ -81,8 +81,8 @@ const setCustodianColor = async (
 ): Promise<Array<Custodian>> => {
   const connection = await mysql.createConnection({
     host: getEnv('MYSQL_HOST'),
-    user: process.env.MYSQL_USER,
-    password: process.env.MYSQL_ROOT_PASSWORD,
+    user: getEnv('MYSQL_USER'),
+    password: getEnv('MYSQL_ROOT_PASSWORD'),
     database: dbName,
   })
   await connection.execute(

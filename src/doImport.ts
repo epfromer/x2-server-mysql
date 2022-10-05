@@ -36,8 +36,8 @@ async function run() {
   processSend(`connect to ${getEnv('MYSQL_HOST')}`)
   let connection = await mysql.createConnection({
     host: getEnv('MYSQL_HOST'),
-    user: process.env.MYSQL_USER,
-    password: process.env.MYSQL_ROOT_PASSWORD,
+    user: getEnv('MYSQL_USER'),
+    password: getEnv('MYSQL_ROOT_PASSWORD'),
   } as ConnectionOptions)
 
   const insertEmails = async (emails: Email[]): Promise<void> => {
@@ -133,8 +133,8 @@ async function run() {
 
   connection = await mysql.createConnection({
     host: getEnv('MYSQL_HOST'),
-    user: process.env.MYSQL_USER,
-    password: process.env.MYSQL_ROOT_PASSWORD,
+    user: getEnv('MYSQL_USER'),
+    password: getEnv('MYSQL_ROOT_PASSWORD'),
     database: dbName,
   } as ConnectionOptions)
 

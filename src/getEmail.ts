@@ -113,8 +113,8 @@ export async function getEmail(httpQuery: HTTPQuery): Promise<EmailTotal> {
 
     const connection = await mysql.createConnection({
       host: getEnv('MYSQL_HOST'),
-      user: process.env.MYSQL_USER,
-      password: process.env.MYSQL_ROOT_PASSWORD,
+      user: getEnv('MYSQL_USER'),
+      password: getEnv('MYSQL_ROOT_PASSWORD'),
       database: dbName,
     })
     const [rows] = await connection.execute(q)

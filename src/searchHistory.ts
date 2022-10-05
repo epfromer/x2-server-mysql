@@ -7,18 +7,10 @@ import {
 import mysql from 'mysql2/promise'
 
 export async function getSearchHistory(): Promise<Array<SearchHistoryEntry>> {
-  if (
-    !getEnv('MYSQL_HOST') ||
-    !process.env.MYSQL_USER ||
-    !process.env.MYSQL_ROOT_PASSWORD
-  ) {
-    throw 'MYSQL_HOST or MYSQL_USER or MYSQL_ROOT_PASSWORD undefined'
-  }
-
   const connection = await mysql.createConnection({
     host: getEnv('MYSQL_HOST'),
-    user: process.env.MYSQL_USER,
-    password: process.env.MYSQL_ROOT_PASSWORD,
+    user: getEnv('MYSQL_USER'),
+    password: getEnv('MYSQL_ROOT_PASSWORD'),
     database: dbName,
   })
   const [rows] = await connection.execute(
@@ -35,18 +27,10 @@ export async function getSearchHistory(): Promise<Array<SearchHistoryEntry>> {
 }
 
 export async function clearSearchHistory(): Promise<string> {
-  if (
-    !getEnv('MYSQL_HOST') ||
-    !process.env.MYSQL_USER ||
-    !process.env.MYSQL_ROOT_PASSWORD
-  ) {
-    throw 'MYSQL_HOST or MYSQL_USER or MYSQL_ROOT_PASSWORD undefined'
-  }
-
   const connection = await mysql.createConnection({
     host: getEnv('MYSQL_HOST'),
-    user: process.env.MYSQL_USER,
-    password: process.env.MYSQL_ROOT_PASSWORD,
+    user: getEnv('MYSQL_USER'),
+    password: getEnv('MYSQL_ROOT_PASSWORD'),
     database: dbName,
   })
   await connection.execute(`truncate table ${searchHistoryCollection}`)
