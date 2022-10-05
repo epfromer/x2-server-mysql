@@ -6,14 +6,6 @@ import { graphqlSchema } from './common'
 import root from './root'
 dotenv.config()
 
-if (
-  !process.env.MYSQL_HOST ||
-  !process.env.MYSQL_USER ||
-  !process.env.MYSQL_ROOT_PASSWORD
-) {
-  throw 'MYSQL_HOST or MYSQL_USER or MYSQL_ROOT_PASSWORD undefined'
-}
-
 const app = express()
 app.use(cors())
 app.use(
@@ -30,6 +22,9 @@ app.use(
     }),
   }) as Application
 )
+app.get('/', function (req, res) {
+  res.send('x2-server-mysql: GraphQL interface on email in MySQL for X2 client')
+})
 
 const port = process.env.PORT || 3000
 app.listen(port, () => console.log(`mysql running on PORT: ${port}`))

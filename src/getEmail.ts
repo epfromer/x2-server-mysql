@@ -3,6 +3,7 @@ import {
   defaultLimit,
   emailCollection,
   EmailTotal,
+  getEnv,
   HTTPQuery,
   searchHistoryCollection,
   startupQuery,
@@ -111,7 +112,7 @@ export async function getEmail(httpQuery: HTTPQuery): Promise<EmailTotal> {
       ` offset ${httpQuery.skip ? +httpQuery.skip : 0} `
 
     const connection = await mysql.createConnection({
-      host: process.env.MYSQL_HOST,
+      host: getEnv('MYSQL_HOST'),
       user: process.env.MYSQL_USER,
       password: process.env.MYSQL_ROOT_PASSWORD,
       database: dbName,

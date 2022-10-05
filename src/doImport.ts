@@ -8,6 +8,7 @@ import {
   emailCollection,
   EmailSentByDay,
   emailSentByDayCollection,
+  getEnv,
   getNumPSTs,
   processCustodians,
   processEmailSentByDay,
@@ -32,9 +33,9 @@ async function run() {
     return
   }
 
-  processSend(`connect to ${process.env.MYSQL_HOST}`)
+  processSend(`connect to ${getEnv('MYSQL_HOST')}`)
   let connection = await mysql.createConnection({
-    host: process.env.MYSQL_HOST,
+    host: getEnv('MYSQL_HOST'),
     user: process.env.MYSQL_USER,
     password: process.env.MYSQL_ROOT_PASSWORD,
   } as ConnectionOptions)
@@ -131,7 +132,7 @@ async function run() {
   connection.end()
 
   connection = await mysql.createConnection({
-    host: process.env.MYSQL_HOST,
+    host: getEnv('MYSQL_HOST'),
     user: process.env.MYSQL_USER,
     password: process.env.MYSQL_ROOT_PASSWORD,
     database: dbName,

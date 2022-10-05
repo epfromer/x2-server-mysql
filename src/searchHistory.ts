@@ -1,9 +1,14 @@
-import { dbName, searchHistoryCollection, SearchHistoryEntry } from './common'
+import {
+  dbName,
+  getEnv,
+  searchHistoryCollection,
+  SearchHistoryEntry,
+} from './common'
 import mysql from 'mysql2/promise'
 
 export async function getSearchHistory(): Promise<Array<SearchHistoryEntry>> {
   if (
-    !process.env.MYSQL_HOST ||
+    !getEnv('MYSQL_HOST') ||
     !process.env.MYSQL_USER ||
     !process.env.MYSQL_ROOT_PASSWORD
   ) {
@@ -11,7 +16,7 @@ export async function getSearchHistory(): Promise<Array<SearchHistoryEntry>> {
   }
 
   const connection = await mysql.createConnection({
-    host: process.env.MYSQL_HOST,
+    host: getEnv('MYSQL_HOST'),
     user: process.env.MYSQL_USER,
     password: process.env.MYSQL_ROOT_PASSWORD,
     database: dbName,
@@ -31,7 +36,7 @@ export async function getSearchHistory(): Promise<Array<SearchHistoryEntry>> {
 
 export async function clearSearchHistory(): Promise<string> {
   if (
-    !process.env.MYSQL_HOST ||
+    !getEnv('MYSQL_HOST') ||
     !process.env.MYSQL_USER ||
     !process.env.MYSQL_ROOT_PASSWORD
   ) {
@@ -39,7 +44,7 @@ export async function clearSearchHistory(): Promise<string> {
   }
 
   const connection = await mysql.createConnection({
-    host: process.env.MYSQL_HOST,
+    host: getEnv('MYSQL_HOST'),
     user: process.env.MYSQL_USER,
     password: process.env.MYSQL_ROOT_PASSWORD,
     database: dbName,
