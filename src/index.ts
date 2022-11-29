@@ -4,7 +4,10 @@ import express, { Application } from 'express'
 import { graphqlHTTP } from 'express-graphql'
 import { graphqlSchema } from './common'
 import root from './root'
+
 dotenv.config()
+const VERBOSE = process.env.VERBOSE === '1'
+console.log('VERBOSE', VERBOSE)
 
 const app = express()
 app.use(cors())
@@ -26,5 +29,5 @@ app.get('/', function (req, res) {
   res.send('x2-server-mysql: GraphQL interface on email in MySQL for X2 client')
 })
 
-const port = process.env.PORT || 3000
-app.listen(port, () => console.log(`mysql running on PORT: ${port}`))
+const port = process.env.PORT || 80
+app.listen(port, () => console.log(`mysql on port ${port}`))
